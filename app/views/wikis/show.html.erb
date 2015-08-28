@@ -1,7 +1,8 @@
-<h1>Wikis#show</h1>
-<p>Find me in app/views/wikis/show.html.erb</p>
+<h1><%= @wiki.title %></h1>
 
-<h4><%= @wiki.title %></h4>
 <p>
   <%= @wiki.body %>
 </p>
+
+<%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
+<%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete %>

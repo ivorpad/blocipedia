@@ -1,3 +1,5 @@
 class Wiki < ActiveRecord::Base
-  has_and_belongs_to_many :user
+  belongs_to :user
+
+  validates :title, length: { minimum: 5 }, presence: true
 end
