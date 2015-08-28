@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <ul class="nav nav-tabs">
+  <li><a href="#">Link</a></li>
+  <li><a href="#">Link</a></li>
 
+  <div class="pull-right user-info">
+      Hello User, <a href="#">Profile</a> | <a href="#">Sign out</a>
+  </div>
+</ul>
+  <%= yield %>
+  </div>
 </body>
 </html>
