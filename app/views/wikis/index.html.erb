@@ -1,9 +1,9 @@
 <h1>Wikis</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, officiis!</p>
-<ul>
+
   <% @wikis.each do |wiki| %>
-    <li><%= link_to wiki.title, wiki %></li>
+    <h4><%= link_to wiki.title, wiki %></h4>
   <% end %>
-</ul>
+
 
 <%= link_to "Create wiki", new_wiki_path, class: 'btn btn-success' %>

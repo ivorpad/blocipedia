@@ -6,7 +6,7 @@
 
     <%= form_for @wiki do |f| %>
       <% @wiki.errors.full_messages.each do |msg| %>
-        <p class="alert bg-danger"><%= msg %></p>
+        <%= content_tag :div, msg, class: 'alert bg-danger' %>
       <% end %>
 
     <div class="form-group">
