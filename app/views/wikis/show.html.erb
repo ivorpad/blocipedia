@@ -5,4 +5,4 @@
 </p>
 
 <%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
-<%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete %>
+<%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
