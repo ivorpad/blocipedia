@@ -1,6 +1,15 @@
 <h1>Wikis</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, officiis!</p>
 
+<div class="row search-form">
+  <%= form_tag wikis_path, :method => :get, class: 'form-inline col-md-3' do %>
+
+      <%= text_field_tag :search, params[:search], class: 'form-control' %>
+      <%= submit_tag "Search", :name => nil, class: 'btn btn-success' %>
+
+  <% end %>
+</div>
+
 
 <%= render partial: "wiki" %>
 

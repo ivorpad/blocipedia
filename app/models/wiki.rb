@@ -13,4 +13,8 @@ class Wiki < ActiveRecord::Base
   delegate :username,
            :email,
            :to => :user, :allow_nil => true
+
+  searchable do
+    text :title, :body
+  end
 end

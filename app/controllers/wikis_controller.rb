@@ -1,6 +1,14 @@
 class WikisController < ApplicationController
   def index
-    @wikis = policy_scope(Wiki).all
+    @query = policy_scope(Wiki).search do
+      fulltext params[:search]
+    end
+
+    @wikis = @query.results
+
+    # Added a search feature but lost the capability to
+    # filter private content for standard users.
+    # @wikis =
   end
 
   def show
