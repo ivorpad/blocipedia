@@ -1,11 +1,9 @@
 <h1>Wikis</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, officiis!</p>
 
-<% if policy(Wiki.new).create? %>
-    <% @wikis.each do |wiki| %>
-        <h4><%= link_to wiki.title, wiki %></h4>
-    <% end %>
+
+<% @wikis.each do |wiki| %>
+    <h4><%= link_to wiki.title, wiki %></h4>
 <% end %>
-    <div class="divider"></div>
 
 <%= link_to "Create wiki", new_wiki_path, class: 'btn btn-success btn-lg' %>
