@@ -4,5 +4,12 @@
   <%= @wiki.body %>
 </p>
 
+<div class="author-meta">
+  <p>Created by: <%= @wiki.username %></p>
+</div>
+
 <%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
-<%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete %>
+
+<% if policy(Wiki.new).destroy? %>
+<%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
