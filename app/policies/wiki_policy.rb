@@ -4,16 +4,16 @@ class WikiPolicy < ApplicationPolicy
     user.present?
   end
 
+  def show?
+    create?
+  end
+
   class Scope < Scope
     def resolve
-      if user.present?
-        if user.admin? || user.premium?
-          scope
+      if user.present? && (user.admin? || user.premium?)
+          scope.all
         else
           scope.where(:private => false)
-        end
-      else
-        scope
       end
     end
   end
