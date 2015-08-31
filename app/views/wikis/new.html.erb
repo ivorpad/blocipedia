@@ -18,10 +18,12 @@
       <%= f.label :body %>
       <%= f.text_area :body, class: "form-control" %>
     </div>
+   <% if current_user.admin? || current_user.premium? %>
     <div class="form-group">
       <%= f.label :private %>
       <%= f.check_box :private %>
     </div>
+    <% end %>
 
     <div class="form-group">
       <%= f.submit "Create wiki", class: "btn btn-success" %>
