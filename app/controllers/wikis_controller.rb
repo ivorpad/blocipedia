@@ -8,7 +8,7 @@ class WikisController < ApplicationController
 
     # Added a search feature but lost the capability to
     # filter private content for standard users.
-    # @wikis =
+    # @wikis = policy_scope(Wiki)
   end
 
   def show
