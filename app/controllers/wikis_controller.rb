@@ -17,7 +17,7 @@ class WikisController < ApplicationController
     @wiki.user = current_user
     authorize @wiki
     if @wiki.save
-      redirect_to wiki_path(@wiki)
+      redirect_to wikis_path
       flash[:notice] = "Your Wiki has been created"
     else
       render :new

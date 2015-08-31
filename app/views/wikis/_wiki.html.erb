@@ -2,31 +2,22 @@
   <table class="table table-hover">
     <thead>
     <tr>
-      <th>#</th>
       <th>Programming</th>
       <th>Edit</th>
       <th>Delete</th>
+      <th>Author</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Sports</td>
-      <td><button type="button" class="btn btn-primary btn-xs">Edit</button></td>
-      <td><button type="button" class="btn btn-danger btn-xs">Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Entertainment</td>
-      <td><button type="button" class="btn btn-primary btn-xs">Edit</button></td>
-      <td><button type="button" class="btn btn-danger btn-xs">Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Dogs</td>
-      <td><button type="button" class="btn btn-primary btn-xs">Edit</button></td>
-      <td><button type="button" class="btn btn-danger btn-xs">Delete</button></td>
-    </tr>
+      <% @wikis.each do |wiki| %>
+        <tr>
+          <td><%= link_to wiki.title, wiki %></td>
+          <td><%= link_to "Edit", edit_wiki_path(wiki.id), class: 'btn btn-primary btn-xs' %></td>
+          <td><%= link_to "Delete", wiki_path(wiki.id), class: 'btn btn-danger btn-xs', method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <td><%= wiki.username %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div><!-- /example -->
+
