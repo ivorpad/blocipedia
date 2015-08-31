@@ -10,7 +10,7 @@ class WikiPolicy < ApplicationPolicy
           if user.admin? || user.premium?
             scope
           else
-            scope.where(:private => true)
+            scope.where(:private => false)
           end :
             scope
     end
