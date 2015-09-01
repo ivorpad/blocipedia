@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    create?
+    record.private? || user.present?
   end
 
   class Scope < Scope
