@@ -5,7 +5,18 @@ class Wiki < ActiveRecord::Base
   after_initialize :set_default_private_option, :if => :new_record?
   default_scope { order('updated_at DESC') }
 
-  scope :visible_to, -> (user) { (user.admin? || user.premium?) ? all : where(private: false) }
+  #scope :visible_to, -> (user) { user ? all : where(private: false) }
+
+  # Using a Scope is fine and is actually encouraged, but this is more readable for now.
+  def self.visible_to(user)
+    if user
+      #Wiki.all
+      all
+    else
+      #Wiki.where(private: false)
+      where(private: false)
+    end
+  end
 
   def set_default_private_option
     self.private ||= false
