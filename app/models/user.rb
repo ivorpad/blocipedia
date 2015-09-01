@@ -9,14 +9,14 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
-    self.role ||= 'standard'
+    self.role ||= :standard
   end
 
   def admin?
-    role == 'admin'
+    role == :admin
   end
 
   def premium?
-    role == 'premium'
+    role == :premium
   end
 end
