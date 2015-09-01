@@ -17,13 +17,14 @@ gem 'devise'
 gem 'pundit'
 gem 'faker', '~> 1.5.0'
 
-
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-
+  gem 'progress_bar'
 
 # Custom Gems :: Dev
   gem 'figaro', '1.0'
