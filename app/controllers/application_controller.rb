@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :username
+    devise_parameter_sanitizer.for(:account_update) << :username
   end
 
   def user_not_authorized
