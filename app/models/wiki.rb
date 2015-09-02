@@ -3,6 +3,7 @@ class Wiki < ActiveRecord::Base
 
   validates :title, length: { minimum: 5 }, presence: true
   after_initialize :set_default_private_option, :if => :new_record?
+  default_scope { order('updated_at DESC') }
 
   def set_default_private_option
     self.private ||= false
