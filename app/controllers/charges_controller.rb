@@ -7,19 +7,17 @@ class ChargesController < ApplicationController
       @amount = 10_00
     end
   end
-  def show
-    raise
-  end
 
-  def new
-    @stripe_btn_data = {
-        key: "#{ Rails.configuration.stripe[:publishable_key] }",
-        description: "BigMoney Membership - #{current_user.username}",
-        amount: Amount.default
-    }
-  end
+  # def new
+  #   @stripe_btn_data = {
+  #       key: "#{ Rails.configuration.stripe[:publishable_key] }",
+  #       description: "Premium Membership - #{current_user.username}",
+  #       amount: Amount.default
+  #   }
+  # end
 
   def create
+
     customer = Stripe::Customer.create(
         email: current_user.email,
         card: params[:stripeToken]
