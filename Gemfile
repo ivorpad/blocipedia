@@ -16,7 +16,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'pundit'
 gem 'faker', '~> 1.5.0'
-
+gem 'stripe'
 
 
 group :development, :test do
