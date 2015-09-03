@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
   def premium?
     role == :premium
   end
+
+  def standard?
+    role == :standard
+  end
 end
