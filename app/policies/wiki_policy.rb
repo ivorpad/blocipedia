@@ -1,5 +1,6 @@
 class WikiPolicy < ApplicationPolicy
 
+
   def create?
     user.present?
   end
@@ -9,17 +10,25 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    !record.private? || user.admin? || user.premium?
+   user.admin? || user.premium?
   end
 
-  # class Scope < Scope
-  #   def resolve
-  #     if user.present? && (user.admin? || user.premium?)
-  #         scope.all
-  #       else
-  #         scope.where(:private => false)
-  #     end
-  #   end
-  # end
+  class Scope < Scope
+
+    def resolve
+      if user.present?
+         if user.admin?
+          scope.all
+         elsif user.premium?
+            # placeholder, find for a solution.
+            scope.all.where(:user_id => user.id)
+         elsif user.standard?
+           scope.publicly_viewable
+         end
+        else
+        scope.publicly_viewable
+      end
+    end
+  end
 end
 

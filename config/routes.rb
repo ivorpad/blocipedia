@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:update, :show, :index]
   resources :wikis
   resources :charges, only: [:new, :create]
+  delete '/downgrade', to: 'charges#downgrade'
 
   get 'welcome/about'
   root to: 'welcome#index'

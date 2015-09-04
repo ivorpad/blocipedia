@@ -39,9 +39,12 @@
         </div>
     <% end %>
 
-    <h4>Upgrade</h4>
-
-    <%= render partial: 'charges/premium_button', locals: { stripe_btn_data: @stripe_btn_data } %>
+    <% if current_user.standard? %>
+        <h4>Upgrade your account to Premium</h4>
+        <%= render partial: 'charges/premium_button', locals: { stripe_btn_data: @stripe_btn_data } %>
+     <% elsif current_user.premium? %>
+        <%= button_to 'Downgrade', downgrade_path, method: :delete, class: 'btn' %>
+     <% end %>
 
     <h3>Cancel my account</h3>
 

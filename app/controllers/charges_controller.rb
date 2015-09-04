@@ -8,19 +8,15 @@ class ChargesController < ApplicationController
     end
   end
 
-  # def new
-  #   @stripe_btn_data = {
-  #       key: "#{ Rails.configuration.stripe[:publishable_key] }",
-  #       description: "Premium Membership - #{current_user.username}",
-  #       amount: Amount.default
-  #   }
-  # end
-
   def create
+
     customer = Stripe::Customer.create(
         email: current_user.email,
         card: params[:stripeToken]
     )
+    current_user.customer_id = customer.id
+    return unless customer.subscriptions.data.empty?
+    customer.subscriptions.create(plan: 'premium')
 
     charge = Stripe::Charge.create(
         customer: customer.id, # Note -- this is NOT the user_id in your app
@@ -31,11 +27,20 @@ class ChargesController < ApplicationController
 
     flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
     current_user.update_attribute(:role, 'premium')
-    redirect_to user_path(current_user)
+    redirect_to edit_user_registration_path
 
 
       rescue Stripe::CardError => e
         flash[:error] = e.message
-        redirect_to new_charge_path
-    end
+        redirect_to edit_user_registration_path
+  end
+
+  def downgrade
+    customer = Stripe::Customer.retrieve(current_user.customer_id)
+    subscription_id = customer.subscriptions.data.first.id
+    customer.subscriptions.retrieve(subscription_id).delete
+    current_user.update_attributes(role: 'standard')
+    redirect_to edit_user_registration_path
+  end
+
 end

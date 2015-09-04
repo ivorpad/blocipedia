@@ -16,7 +16,6 @@
       <li><%= link_to 'Wikis', wikis_path %></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact us</a></li>
-
       <div class="pull-right user-info">
            <% if current_user %>
              Hello <%= link_to current_user.username, edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
