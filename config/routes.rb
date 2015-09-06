@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  get 'users/update'
+
+ # devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
+
   resources :users, only: [:update, :show, :index]
   resources :wikis
+  resources :charges, only: [:new, :create]
+  delete '/downgrade', to: 'charges#downgrade'
 
   get 'welcome/about'
   root to: 'welcome#index'
