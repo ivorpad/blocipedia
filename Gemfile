@@ -17,6 +17,7 @@ gem 'devise'
 gem 'pundit'
 gem 'faker', '~> 1.5.0'
 gem 'stripe'
+gem 'redcarpet'
 
 
 group :development, :test do

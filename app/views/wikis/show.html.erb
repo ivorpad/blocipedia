@@ -1,8 +1,5 @@
-<h1><%= @wiki.title %></h1>
-
-<p>
-  <%= @wiki.body %>
-</p>
+<h1><%= @wiki.markdown_title %></h1>
+<p><%= @wiki.markdown_body %></p>
 
 <div class="author-meta">
   <p>Created by: <%= @wiki.username %></p>
@@ -10,6 +7,6 @@
 
 <%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
 
-<% if policy(Wiki.new).destroy? %>
+<% if policy(Wiki.new).create? %>
 <%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>

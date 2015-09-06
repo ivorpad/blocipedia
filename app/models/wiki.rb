@@ -8,7 +8,7 @@ class Wiki < ActiveRecord::Base
   scope :visible_to, -> (user) { user ? all : where(private: false) }
   scope :publicly_viewable, -> { where( private: false ) }
   scope :privately_viewable, -> { where( private: true ) }
-
+  scope :changed, -> { where('updated_at > created_at') }
   # Using a Scope is fine and is actually encouraged, but this is more readable for now.
   # def self.visible_to(user)
   #   if user
@@ -20,6 +20,10 @@ class Wiki < ActiveRecord::Base
   #   end
   # end
 
+  def self.changed?
+    changed.any?
+  end
+
   def set_default_private_option
     self.private ||= false
   end
@@ -29,4 +33,23 @@ class Wiki < ActiveRecord::Base
   delegate :username,
            :email,
            :to => :user, :allow_nil => true
+
+  def markdown_title
+    render_as_markdown(title)
+  end
+
+  def markdown_body
+    render_as_markdown(body)
+  end
+
+  private
+
+  def render_as_markdown(markdown)
+    renderer = Redcarpet::Render::HTML.new
+    extensions = { fenced_code_blocks: true }
+    redcarpet = Redcarpet::Markdown.new(renderer, extensions)
+    (redcarpet.render markdown).html_safe
+  end
+
+
 end
