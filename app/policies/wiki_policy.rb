@@ -20,8 +20,13 @@ class WikiPolicy < ApplicationPolicy
          if user.admin?
           scope.all
          elsif user.premium?
-            # placeholder, find for a solution.
-            scope.all.where(:user_id => user.id)
+            # http://stackoverflow.com/questions/9540801/combine-two-activerecordrelation-objects
+           scope.where(
+               scope.arel_table[:user_id].eq(user.id).or(
+                   scope.arel_table[:private].eq(false)
+               )
+           )
+
          elsif user.standard?
            scope.publicly_viewable
          end
