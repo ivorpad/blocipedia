@@ -18,8 +18,6 @@ gem 'pundit'
 gem 'faker', '~> 1.5.0'
 gem 'stripe'
 gem 'redcarpet'
-gem 'will_paginate', '~> 3.0'
-
 
 group :development, :test do
   gem 'byebug'
