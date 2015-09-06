@@ -1,9 +1,12 @@
 <h1><%= @wiki.markdown_title %></h1>
+<div class="author-meta">
+  <small>Created by: <%= @wiki.username %></small>
+  <br/>
+  <small>Created: <%= time_ago_in_words(@wiki.created_at) %> ago</small>
+</div>
 <p><%= @wiki.markdown_body %></p>
 
-<div class="author-meta">
-  <p>Created by: <%= @wiki.username %></p>
-</div>
+
 
 <%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
 
