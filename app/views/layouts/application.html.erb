@@ -45,6 +45,11 @@
 
     <%= yield %>
   </div>
+  <script type="text/javascript">
+      jQuery(document).ready(function($) {
+          var editor = new EpicEditor().load()
+      });
+  </script>
 </body>
 
 </html>
