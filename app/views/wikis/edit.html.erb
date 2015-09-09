@@ -30,5 +30,38 @@
     </div>
 
     <% end %>
+
+<% if policy(Collaborator.new).create? && @wiki.private? %>
+    <%= form_tag collaborators_path do %>
+      <%= hidden_field_tag :wiki_id, @wiki.id %>
+
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>email</th>
+            <th>Authorize?</th>
+          </tr>
+            <%= hidden_field_tag :wiki_id, @wiki.id %>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+              <!--
+              # check_box_tag(name, value = "1", checked = false, options = {})
+              #
+              # name = collab_ids[]
+              # value = user.id
+              # checked (bool) = @wiki.collaborators.where(user_id: user.id).any?
+              -->
+              <%= check_box_tag 'collab_ids[]', user.id, @wiki.collaborators.where(user_id: user.id).any? %>
+            </td>
+          </tr>
+
+      <% end %>
+      </table>
+      <%= submit_tag 'Authorize Users', class: 'btn btn-info' %>
+    <% end %>
+<% end %>
   </div>
 </div>

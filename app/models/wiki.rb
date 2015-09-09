@@ -1,5 +1,10 @@
 class Wiki < ActiveRecord::Base
+
   belongs_to :user
+
+  has_many :collaborators
+  has_many :users, through: :collaborators
+
 
   validates :title, length: { minimum: 5 }, presence: true
   after_initialize :set_default_private_option, :if => :new_record?
@@ -11,6 +16,7 @@ class Wiki < ActiveRecord::Base
   scope :changed, -> { where('updated_at > created_at') }
 
   # Using a Scope is fine and is actually encouraged, but a scope is nothing but a class method.
+
   # def self.visible_to(user)
   #   if user
   #     #Wiki.all
@@ -51,6 +57,4 @@ class Wiki < ActiveRecord::Base
     redcarpet = Redcarpet::Markdown.new(renderer, extensions)
     (redcarpet.render markdown).html_safe
   end
-
-
 end
