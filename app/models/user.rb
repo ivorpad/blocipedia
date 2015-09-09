@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :wikis
 
+  # Should be collaborations (?) because a User has many collaborations
+  # User: has_many :collaborators doesn't sound right
   has_many :collaborators
   has_many :wikis, through: :collaborators
 
