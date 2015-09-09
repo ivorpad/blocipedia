@@ -10,12 +10,6 @@
 
 <%= link_to "Edit wiki", edit_wiki_path, class: 'btn btn-success' %>
 
-<% if @wiki.private? %>
-    <a href="#"  class="btn btn-info">Add Collaborators</a>
-<% end %>
-
 <% if policy(Wiki.new).create? %>
 <%= link_to "Delete wiki", wiki_path(@wiki.id), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
-
-

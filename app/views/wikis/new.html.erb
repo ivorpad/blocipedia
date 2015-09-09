@@ -19,7 +19,7 @@
       <%= f.text_area :body, class: "form-control" %>
     </div>
 
-   <% if current_user.admin? || current_user.premium? %>
+   <% if policy(Collaborator.new).create? %>
         <div class="form-group">
           <%= f.label :private %>
           <%= f.check_box :private %>

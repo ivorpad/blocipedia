@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role, :if => :new_record?
 
+
+  # http://stackoverflow.com/questions/2672744/rails-activerecord-find-all-users-except-current-user
+  def self.all_except(user)
+    where.not(id: user)
+  end
+
   def set_default_role
     self.role ||= 'standard'
   end

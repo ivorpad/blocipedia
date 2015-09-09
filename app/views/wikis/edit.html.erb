@@ -30,5 +30,16 @@
     </div>
 
     <% end %>
+
+<% if policy(Collaborator.new).create? && @wiki.private? %>
+    <%= form_tag '/collaborators' do %>
+      <%= hidden_field_tag :wiki_id, @wiki.id %>
+
+      <% @users.each do |user| %>
+        <li><%= user.username %></li>
+      <% end %>
+
+    <% end %>
+<% end %>
   </div>
 </div>

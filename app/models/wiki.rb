@@ -14,6 +14,7 @@ class Wiki < ActiveRecord::Base
   scope :publicly_viewable, -> { where( private: false ) }
   scope :privately_viewable, -> { where( private: true ) }
   scope :changed, -> { where('updated_at > created_at') }
+  
   # Using a Scope is fine and is actually encouraged, but this is more readable for now.
   # def self.visible_to(user)
   #   if user

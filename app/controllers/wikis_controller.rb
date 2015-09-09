@@ -1,13 +1,10 @@
 class WikisController < ApplicationController
   def index
     @wikis = policy_scope(Wiki)
-    #@wikis = Wiki.visible_to(current_user)
-    authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
   end
 
   def new
@@ -28,13 +25,13 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @users = User.all_except(current_user)
     @wiki = Wiki.find(params[:id])
     authorize @wiki
   end
 
   def update
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki updated"
       redirect_to @wiki
@@ -45,8 +42,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    #@wiki = policy_scope(Wiki).find(params[:id])
-    authorize @wiki
+    # authorize @wiki
     if @wiki.destroy
       flash[:notice] = "Wiki deleted successfully"
       redirect_to @wiki
