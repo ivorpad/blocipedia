@@ -18,8 +18,19 @@
       <li><a href="#">Contact us</a></li>
       <div class="pull-right user-info">
            <% if current_user %>
-             Hello <%= link_to current_user.username, edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+             Hello <%= link_to current_user.username, edit_user_registration_path %> 
+
+              <% if current_user.admin? %>
+                (admin)
+                <% elsif current_user.premium? %>
+                (premium)
+                <% else %>
+                (standard)
+              <% end %>
+
+              | <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
            <% else %>
+
              <%= link_to "Sign In", new_user_session_path %>
            <% end %>
          </div>
