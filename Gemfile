@@ -18,6 +18,7 @@ gem 'pundit'
 gem 'faker', '~> 1.5.0'
 gem 'stripe'
 gem 'redcarpet'
+gem 'epic-editor-rails'
 
 group :development, :test do
   gem 'byebug'

@@ -17,7 +17,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
- @import "welcome.scss";
+ @import 'base/epiceditor';
+
 
 .content{
   margin-top: 50px;
@@ -39,3 +40,6 @@
   }
 }
 
+#epiceditor body {
+    font-family: "Helvetica Neue", "Arial", sans-serif !important;
+}
